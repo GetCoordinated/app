@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GetCoordinated - Roadmaps</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>GetCoordinated</h1>
+            </div>
+            <div class="nav-links">
+                <a href="roadmaps.html" class="active">Roadmaps</a>
+                <a href="integrations.html">Integrations</a>
+                <a href="settings.html">Settings</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        <div class="page-header">
+            <div class="header-content">
+                <div>
+                    <h1>Team Roadmaps</h1>
+                    <p>View and manage roadmaps across all teams</p>
+                </div>
+                <button class="btn btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    New Roadmap
+                </button>
+            </div>
+        </div>
+        
+        <div class="roadmaps-grid">
+            <!-- GTM Roadmap -->
+            <div class="roadmap-card" data-team="gtm">
+                <div class="roadmap-header">
+                    <div class="roadmap-icon gtm">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 8V12L15 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="roadmap-menu">⋯</div>
+                </div>
+                
+                <h3>Go-To-Market</h3>
+                <p class="roadmap-description">Product launches, marketing campaigns, and sales enablement</p>
+                
+                <div class="roadmap-stats">
+                    <div class="stat">
+                        <span class="stat-value">12</span>
+                        <span class="stat-label">Initiatives</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">8</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="roadmap-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 65%"></div>
+                    </div>
+                    <span class="progress-text">65% Complete</span>
+                </div>
+                
+                <div class="roadmap-footer">
+                    <div class="team-members">
+                        <div class="avatar" style="background: #ef4444;">JD</div>
+                        <div class="avatar" style="background: #f59e0b;">SM</div>
+                        <div class="avatar" style="background: #10b981;">AK</div>
+                        <div class="avatar-more">+5</div>
+                    </div>
+                    <span class="last-updated">Updated 2h ago</span>
+                </div>
+            </div>
+            
+            <!-- Engineering Roadmap -->
+            <div class="roadmap-card" data-team="engineering">
+                <div class="roadmap-header">
+                    <div class="roadmap-icon engineering">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M9 3L3 9L9 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M15 9L21 15L15 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 5L11 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="roadmap-menu">⋯</div>
+                </div>
+                
+                <h3>Engineering</h3>
+                <p class="roadmap-description">Product development, infrastructure, and technical initiatives</p>
+                
+                <div class="roadmap-stats">
+                    <div class="stat">
+                        <span class="stat-value">24</span>
+                        <span class="stat-label">Initiatives</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">16</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">8</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="roadmap-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 42%"></div>
+                    </div>
+                    <span class="progress-text">42% Complete</span>
+                </div>
+                
+                <div class="roadmap-footer">
+                    <div class="team-members">
+                        <div class="avatar" style="background: #6366f1;">MK</div>
+                        <div class="avatar" style="background: #8b5cf6;">RP</div>
+                        <div class="avatar" style="background: #ec4899;">LT</div>
+                        <div class="avatar-more">+12</div>
+                    </div>
+                    <span class="last-updated">Updated 1h ago</span>
+                </div>
+            </div>
+            
+            <!-- Partnerships Roadmap -->
+            <div class="roadmap-card" data-team="partnerships">
+                <div class="roadmap-header">
+                    <div class="roadmap-icon partnerships">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="roadmap-menu">⋯</div>
+                </div>
+                
+                <h3>Partnerships</h3>
+                <p class="roadmap-description">Strategic alliances, integrations, and channel partnerships</p>
+                
+                <div class="roadmap-stats">
+                    <div class="stat">
+                        <span class="stat-value">8</span>
+                        <span class="stat-label">Initiatives</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">5</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">3</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="roadmap-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 58%"></div>
+                    </div>
+                    <span class="progress-text">58% Complete</span>
+                </div>
+                
+                <div class="roadmap-footer">
+                    <div class="team-members">
+                        <div class="avatar" style="background: #14b8a6;">TC</div>
+                        <div class="avatar" style="background: #06b6d4;">NH</div>
+                        <div class="avatar" style="background: #3b82f6;">KW</div>
+                        <div class="avatar-more">+3</div>
+                    </div>
+                    <span class="last-updated">Updated 4h ago</span>
+                </div>
+            </div>
+            
+            <!-- Product Roadmap -->
+            <div class="roadmap-card" data-team="product">
+                <div class="roadmap-header">
+                    <div class="roadmap-icon product">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <div class="roadmap-menu">⋯</div>
+                </div>
+                
+                <h3>Product</h3>
+                <p class="roadmap-description">Feature development, UX improvements, and product strategy</p>
+                
+                <div class="roadmap-stats">
+                    <div class="stat">
+                        <span class="stat-value">18</span>
+                        <span class="stat-label">Initiatives</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">11</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">7</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="roadmap-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 51%"></div>
+                    </div>
+                    <span class="progress-text">51% Complete</span>
+                </div>
+                
+                <div class="roadmap-footer">
+                    <div class="team-members">
+                        <div class="avatar" style="background: #f97316;">DL</div>
+                        <div class="avatar" style="background: #84cc16;">JS</div>
+                        <div class="avatar" style="background: #a855f7;">RB</div>
+                        <div class="avatar-more">+8</div>
+                    </div>
+                    <span class="last-updated">Updated 3h ago</span>
+                </div>
+            </div>
+            
+            <!-- Customer Success Roadmap -->
+            <div class="roadmap-card" data-team="customer-success">
+                <div class="roadmap-header">
+                    <div class="roadmap-icon customer-success">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
+                            <path d="M12 14L12 10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            <path d="M10 12L14 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                    </div>
+                    <div class="roadmap-menu">⋯</div>
+                </div>
+                
+                <h3>Customer Success</h3>
+                <p class="roadmap-description">Customer onboarding, support improvements, and retention programs</p>
+                
+                <div class="roadmap-stats">
+                    <div class="stat">
+                        <span class="stat-value">10</span>
+                        <span class="stat-label">Initiatives</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">6</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">4</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="roadmap-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 72%"></div>
+                    </div>
+                    <span class="progress-text">72% Complete</span>
+                </div>
+                
+                <div class="roadmap-footer">
+                    <div class="team-members">
+                        <div class="avatar" style="background: #22c55e;">EB</div>
+                        <div class="avatar" style="background: #eab308;">MP</div>
+                        <div class="avatar" style="background: #06b6d4;">ZR</div>
+                        <div class="avatar-more">+4</div>
+                    </div>
+                    <span class="last-updated">Updated 5h ago</span>
+                </div>
+            </div>
+            
+            <!-- Operations Roadmap -->
+            <div class="roadmap-card" data-team="operations">
+                <div class="roadmap-header">
+                    <div class="roadmap-icon operations">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            <path d="M19.4 15C19.1277 15.6171 18.7583 16.1936 18.3 16.71L19.5 19L17 20L15.91 17.94C15.2672 18.2119 14.5909 18.3951 13.9 18.48V21H10V18.48C9.30913 18.3951 8.63279 18.2119 7.99 17.94L6.91 20L4.5 19L5.7 16.71C5.24167 16.1936 4.87225 15.6171 4.6 15L2 14V10L4.6 9C4.87225 8.38291 5.24167 7.80642 5.7 7.29L4.5 5L7 4L8.09 6.06C8.73279 5.78813 9.40913 5.60487 10.1 5.52V3H14V5.52C14.6909 5.60487 15.3672 5.78813 16.01 6.06L17.09 4L19.5 5L18.3 7.29C18.7583 7.80642 19.1277 8.38291 19.4 9L22 10V14L19.4 15Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="roadmap-menu">⋯</div>
+                </div>
+                
+                <h3>Operations</h3>
+                <p class="roadmap-description">Process improvements, tools optimization, and operational efficiency</p>
+                
+                <div class="roadmap-stats">
+                    <div class="stat">
+                        <span class="stat-value">14</span>
+                        <span class="stat-label">Initiatives</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">9</span>
+                        <span class="stat-label">In Progress</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-value">5</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                
+                <div class="roadmap-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 48%"></div>
+                    </div>
+                    <span class="progress-text">48% Complete</span>
+                </div>
+                
+                <div class="roadmap-footer">
+                    <div class="team-members">
+                        <div class="avatar" style="background: #64748b;">HM</div>
+                        <div class="avatar" style="background: #78716c;">CF</div>
+                        <div class="avatar" style="background: #57534e;">NA</div>
+                        <div class="avatar-more">+6</div>
+                    </div>
+                    <span class="last-updated">Updated 6h ago</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="roadmaps.js"></script>
+</body>
+</html>

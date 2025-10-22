@@ -714,6 +714,504 @@ body:has(.navbar) {
     color: #9ca3af;
 }
 
+/* Roadmap Detail Page Styles */
+.roadmap-detail-header {
+    margin-bottom: 32px;
+}
+
+.back-nav {
+    margin-bottom: 24px;
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6b7280;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: #667eea;
+}
+
+.roadmap-title-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 24px;
+    gap: 24px;
+}
+
+.roadmap-title-left {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.roadmap-icon-large {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.roadmap-icon-large.gtm {
+    background: #fef3c7;
+    color: #f59e0b;
+}
+
+.roadmap-icon-large.engineering {
+    background: #dbeafe;
+    color: #3b82f6;
+}
+
+.roadmap-icon-large.partnerships {
+    background: #d1fae5;
+    color: #10b981;
+}
+
+.roadmap-icon-large.product {
+    background: #fce7f3;
+    color: #ec4899;
+}
+
+.roadmap-icon-large.customer-success {
+    background: #dcfce7;
+    color: #22c55e;
+}
+
+.roadmap-icon-large.operations {
+    background: #f1f5f9;
+    color: #64748b;
+}
+
+.roadmap-detail-header h1 {
+    font-size: 32px;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.roadmap-detail-header p {
+    color: #6b7280;
+    font-size: 16px;
+}
+
+.roadmap-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.roadmap-meta {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 8px;
+}
+
+.meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.meta-label {
+    font-size: 12px;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.meta-value {
+    font-size: 18px;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.meta-progress {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.mini-progress-bar {
+    flex: 1;
+    height: 6px;
+    background: #e5e7eb;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.mini-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border-radius: 3px;
+}
+
+.meta-progress span {
+    font-size: 16px;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+/* Tabs */
+.roadmap-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 32px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.tab-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    color: #6b7280;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+}
+
+.tab-button:hover {
+    color: #667eea;
+}
+
+.tab-button.active {
+    color: #667eea;
+    border-bottom-color: #667eea;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Timeline View */
+.timeline-controls {
+    margin-bottom: 24px;
+}
+
+.timeline-filters {
+    display: flex;
+    gap: 12px;
+}
+
+.filter-select {
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+    color: #374151;
+    background: white;
+    cursor: pointer;
+}
+
+.timeline-view {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.timeline-header {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 2px solid #e5e7eb;
+    background: #f9fafb;
+}
+
+.timeline-label {
+    padding: 16px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+    border-right: 1px solid #e5e7eb;
+}
+
+.timeline-quarters {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.quarter-header {
+    padding: 16px;
+    font-weight: 600;
+    color: #374151;
+    font-size: 14px;
+    text-align: center;
+    border-right: 1px solid #e5e7eb;
+}
+
+.quarter-header:last-child {
+    border-right: none;
+}
+
+.timeline-body {
+    min-height: 400px;
+}
+
+.timeline-row {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    border-bottom: 1px solid #e5e7eb;
+    min-height: 60px;
+}
+
+.timeline-row:last-child {
+    border-bottom: none;
+}
+
+.timeline-row-label {
+    padding: 16px;
+    font-weight: 500;
+    color: #374151;
+    font-size: 14px;
+    border-right: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-track {
+    position: relative;
+    padding: 8px 0;
+}
+
+.timeline-item {
+    position: absolute;
+    height: 44px;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.timeline-item.completed {
+    background: #d1fae5;
+    border: 2px solid #10b981;
+}
+
+.timeline-item.in-progress {
+    background: #fef3c7;
+    border: 2px solid #f59e0b;
+}
+
+.timeline-item.planned {
+    background: #e0e7ff;
+    border: 2px solid #6366f1;
+}
+
+.timeline-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.timeline-item-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1f2937;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.timeline-item-meta {
+    font-size: 11px;
+    color: #6b7280;
+}
+
+/* Initiatives View */
+.initiatives-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
+}
+
+.initiatives-filters {
+    display: flex;
+    gap: 12px;
+}
+
+.initiatives-search {
+    flex: 1;
+    max-width: 300px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.initiatives-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.initiative-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    transition: all 0.2s;
+}
+
+.initiative-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-color: #667eea;
+}
+
+.initiative-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.initiative-card h4 {
+    font-size: 16px;
+    color: #1f2937;
+    margin-bottom: 4px;
+}
+
+.initiative-theme {
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.badge.success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.badge.warning {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.initiative-card-meta {
+    display: flex;
+    gap: 24px;
+}
+
+.initiative-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+/* Board View */
+.kanban-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.kanban-column {
+    background: #f9fafb;
+    border-radius: 8px;
+    padding: 16px;
+    min-height: 500px;
+}
+
+.kanban-column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.kanban-column-header h3 {
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.kanban-count {
+    background: #e5e7eb;
+    color: #374151;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.kanban-column-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.kanban-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.kanban-card:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+
+.kanban-card h4 {
+    font-size: 14px;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.kanban-card-theme {
+    font-size: 12px;
+    color: #6b7280;
+    margin-bottom: 12px;
+}
+
+.kanban-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.kanban-card-meta {
+    font-size: 12px;
+    color: #6b7280;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
     .page-header h1 {
@@ -755,6 +1253,51 @@ body:has(.navbar) {
     .stat-value {
         font-size: 20px;
     }
+    
+    /* Roadmap Detail Responsive */
+    .roadmap-title-section {
+        flex-direction: column;
+    }
+    
+    .roadmap-actions {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .roadmap-actions .btn {
+        width: 100%;
+    }
+    
+    .roadmap-meta {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+    }
+    
+    .roadmap-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .timeline-header {
+        grid-template-columns: 150px 1fr;
+    }
+    
+    .timeline-row {
+        grid-template-columns: 150px 1fr;
+    }
+    
+    .initiatives-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .initiatives-search {
+        max-width: 100%;
+    }
+    
+    .kanban-board {
+        grid-template-columns: 1fr;
+    }
 }
 
 @media (max-width: 480px) {
@@ -794,5 +1337,24 @@ body:has(.navbar) {
         flex-direction: column;
         gap: 12px;
         align-items: flex-start;
+    }
+    
+    /* Roadmap Detail Mobile */
+    .roadmap-title-left {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .roadmap-meta {
+        grid-template-columns: 1fr;
+    }
+    
+    .timeline-view {
+        overflow-x: auto;
+    }
+    
+    .initiative-card-meta {
+        flex-direction: column;
+        gap: 12px;
     }
 }

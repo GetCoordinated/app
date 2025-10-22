@@ -10,9 +10,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
             
             const team = this.getAttribute('data-team');
-            console.log('Opening roadmap for:', team);
-            // In production, this would navigate to the detailed roadmap view
-            // For now, just log it
+            // Navigate to roadmap detail page
+            window.location.href = `roadmap.html?team=${team}`;
         });
     });
     

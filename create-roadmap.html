@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Roadmap - GetCoordinated</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>GetCoordinated</h1>
+            </div>
+            <div class="nav-links">
+                <a href="roadmaps.html">Roadmaps</a>
+                <a href="integrations.html">Integrations</a>
+                <a href="settings.html">Settings</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        <div class="wizard-container">
+            <!-- Progress Steps -->
+            <div class="wizard-steps">
+                <div class="wizard-step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Team Setup</div>
+                </div>
+                <div class="wizard-step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Import Issues</div>
+                </div>
+                <div class="wizard-step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Group Initiatives</div>
+                </div>
+                <div class="wizard-step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Set Timeline</div>
+                </div>
+            </div>
+            
+            <!-- Step 1: Team Setup -->
+            <div class="wizard-content active" id="step1">
+                <div class="wizard-header">
+                    <h2>Create New Roadmap</h2>
+                    <p>Set up the basic information for your roadmap</p>
+                </div>
+                
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="teamName">Team Name</label>
+                        <input type="text" id="teamName" placeholder="e.g., Engineering, Product, Sales" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teamDescription">Description</label>
+                        <textarea id="teamDescription" rows="3" placeholder="What does this team focus on?"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="teamIcon">Team Icon</label>
+                        <select id="teamIcon" class="filter-select">
+                            <option value="gtm">Marketing & Sales</option>
+                            <option value="engineering">Engineering</option>
+                            <option value="partnerships">Partnerships</option>
+                            <option value="product">Product</option>
+                            <option value="customer-success">Customer Success</option>
+                            <option value="operations">Operations</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="timeframe">Timeframe</label>
+                        <select id="timeframe" class="filter-select">
+                            <option value="2024">2024 (Q1-Q4)</option>
+                            <option value="2025">2025 (Q1-Q4)</option>
+                            <option value="h1-2024">H1 2024</option>
+                            <option value="h2-2024">H2 2024</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="wizard-actions">
+                    <button class="btn btn-secondary" onclick="window.location.href='roadmaps.html'">Cancel</button>
+                    <button class="btn btn-primary" onclick="nextStep(2)">Next: Import Issues</button>
+                </div>
+            </div>
+            
+            <!-- Step 2: Import Issues -->
+            <div class="wizard-content" id="step2">
+                <div class="wizard-header">
+                    <h2>Import Linear Issues</h2>
+                    <p>Connect to Linear to import issues, or let AI suggest groupings</p>
+                </div>
+                
+                <div class="import-options">
+                    <div class="import-option-card" onclick="showLinearImport()">
+                        <div class="import-icon">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <path d="M16 0L32 16L16 32L0 16L16 0Z" fill="#5E6AD2"/>
+                                <path d="M16 8L24 16L16 24L8 16L16 8Z" fill="white"/>
+                            </svg>
+                        </div>
+                        <h3>Import from Linear</h3>
+                        <p>Browse and select issues from your Linear workspace</p>
+                    </div>
+                    
+                    <div class="import-option-card" onclick="showAIImport()">
+                        <div class="import-icon ai">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 16l3 3 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3>AI-Powered Import</h3>
+                        <p>Let AI analyze and suggest issue groupings</p>
+                        <span class="badge coming-soon">Coming Soon</span>
+                    </div>
+                    
+                    <div class="import-option-card" onclick="showManualImport()">
+                        <div class="import-icon manual">
+                            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                                <rect x="8" y="8" width="16" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M16 12v8M12 16h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3>Create Manually</h3>
+                        <p>Skip import and create initiatives from scratch</p>
+                    </div>
+                </div>
+                
+                <!-- Linear Import View -->
+                <div id="linearImportView" class="import-view" style="display: none;">
+                    <div class="import-header">
+                        <h3>Select Linear Issues</h3>
+                        <div class="import-filters">
+                            <select class="filter-select">
+                                <option>All Projects</option>
+                                <option>Project Alpha</option>
+                                <option>Project Beta</option>
+                            </select>
+                            <select class="filter-select">
+                                <option>All Labels</option>
+                                <option>Feature</option>
+                                <option>Bug</option>
+                                <option>Enhancement</option>
+                            </select>
+                            <input type="text" class="search-input" placeholder="Search issues...">
+                        </div>
+                    </div>
+                    
+                    <div class="issues-list" id="linearIssuesList">
+                        <!-- Sample Linear issues -->
+                    </div>
+                    
+                    <div class="selected-count">
+                        <span id="selectedCount">0</span> issues selected
+                    </div>
+                </div>
+                
+                <div class="wizard-actions">
+                    <button class="btn btn-secondary" onclick="prevStep(1)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">Next: Group Initiatives</button>
+                </div>
+            </div>
+            
+            <!-- Step 3: Group Initiatives -->
+            <div class="wizard-content" id="step3">
+                <div class="wizard-header">
+                    <h2>Group into Initiatives</h2>
+                    <p>Organize Linear issues into larger initiatives and themes</p>
+                    <div class="ai-suggest-banner">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M10 2l2.4 5.2L18 8l-4.5 4.2 1.1 6.8-5.6-3-5.6 3 1.1-6.8L0 8l5.6-.8L10 2z" fill="#667eea"/>
+                        </svg>
+                        <span>AI can automatically suggest groupings based on issue content and labels (Coming Soon)</span>
+                    </div>
+                </div>
+                
+                <div class="grouping-container">
+                    <div class="grouping-sidebar">
+                        <div class="sidebar-header">
+                            <h4>Themes</h4>
+                            <button class="btn-icon" onclick="addTheme()">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                                    <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="themes-list" id="themesList">
+                            <!-- Themes will be added here -->
+                        </div>
+                    </div>
+                    
+                    <div class="grouping-main">
+                        <div class="ungrouped-section">
+                            <h4>Ungrouped Issues <span class="count" id="ungroupedCount">0</span></h4>
+                            <div class="issues-grid" id="ungroupedIssues">
+                                <!-- Issues will be displayed here -->
+                            </div>
+                        </div>
+                        
+                        <div class="grouped-section" id="groupedSection">
+                            <!-- Grouped initiatives will appear here -->
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wizard-actions">
+                    <button class="btn btn-secondary" onclick="prevStep(2)">Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(4)">Next: Set Timeline</button>
+                </div>
+            </div>
+            
+            <!-- Step 4: Set Timeline -->
+            <div class="wizard-content" id="step4">
+                <div class="wizard-header">
+                    <h2>Set Timeline</h2>
+                    <p>Assign quarters and set target dates for each initiative</p>
+                </div>
+                
+                <div class="timeline-editor">
+                    <div class="timeline-editor-header">
+                        <div class="quarter-labels">
+                            <div class="quarter-label">Q1</div>
+                            <div class="quarter-label">Q2</div>
+                            <div class="quarter-label">Q3</div>
+                            <div class="quarter-label">Q4</div>
+                        </div>
+                    </div>
+                    
+                    <div class="timeline-editor-body" id="timelineEditor">
+                        <!-- Timeline items will be added here -->
+                    </div>
+                </div>
+                
+                <div class="wizard-actions">
+                    <button class="btn btn-secondary" onclick="prevStep(3)">Back</button>
+                    <button class="btn btn-primary" onclick="saveRoadmap()">Create Roadmap</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="create-roadmap.js"></script>
+</body>
+</html>

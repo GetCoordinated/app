@@ -7,26 +7,46 @@ const teamData = {
         progress: 65,
         teamSize: 8,
         lastUpdated: '2h ago',
+        opportunities: [
+            { 
+                id: 1, 
+                title: 'Market Expansion', 
+                summary: 'Enter new market segments and expand customer base', 
+                owner: 'JD',
+                quarterTarget: 'q2',
+                confidence: 'high',
+                health: 'on-track'
+            },
+            { 
+                id: 2, 
+                title: 'Revenue Growth', 
+                summary: 'Increase sales velocity and deal size through enablement', 
+                owner: 'SM',
+                quarterTarget: 'q3',
+                confidence: 'medium',
+                health: 'on-track'
+            }
+        ],
         themes: [
             {
                 name: 'Product Launch',
                 initiatives: [
-                    { id: 1, name: 'Q1 Product Launch Campaign', status: 'completed', owner: 'JD', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-101' },
-                    { id: 2, name: 'Launch Event Planning', status: 'completed', owner: 'SM', quarter: 'q1', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-102' }
+                    { id: 1, name: 'Q1 Product Launch Campaign', status: 'completed', owner: 'JD', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-101', opportunityId: 1 },
+                    { id: 2, name: 'Launch Event Planning', status: 'completed', owner: 'SM', quarter: 'q1', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-102', opportunityId: 1 }
                 ]
             },
             {
                 name: 'Sales Enablement',
                 initiatives: [
-                    { id: 3, name: 'Sales Training Materials', status: 'in-progress', owner: 'AK', quarter: 'q2', startQ: 'q2', endQ: 'q2', linkedIssue: 'LIN-103' },
-                    { id: 4, name: 'Competitive Analysis Documentation', status: 'in-progress', owner: 'JD', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-104' }
+                    { id: 3, name: 'Sales Training Materials', status: 'in-progress', owner: 'AK', quarter: 'q2', startQ: 'q2', endQ: 'q2', linkedIssue: 'LIN-103', opportunityId: 2 },
+                    { id: 4, name: 'Competitive Analysis Documentation', status: 'in-progress', owner: 'JD', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-104', opportunityId: 2 }
                 ]
             },
             {
                 name: 'Marketing Campaigns',
                 initiatives: [
-                    { id: 5, name: 'Summer Campaign', status: 'planned', owner: 'SM', quarter: 'q3', startQ: 'q3', endQ: 'q3', linkedIssue: 'LIN-105' },
-                    { id: 6, name: 'Partner Co-Marketing', status: 'planned', owner: 'AK', quarter: 'q4', startQ: 'q4', endQ: 'q4', linkedIssue: 'LIN-106' }
+                    { id: 5, name: 'Summer Campaign', status: 'planned', owner: 'SM', quarter: 'q3', startQ: 'q3', endQ: 'q3', linkedIssue: 'LIN-105', opportunityId: 1 },
+                    { id: 6, name: 'Partner Co-Marketing', status: 'planned', owner: 'AK', quarter: 'q4', startQ: 'q4', endQ: 'q4', linkedIssue: 'LIN-106', opportunityId: 2 }
                 ]
             }
         ]
@@ -38,26 +58,46 @@ const teamData = {
         progress: 42,
         teamSize: 15,
         lastUpdated: '1h ago',
+        opportunities: [
+            { 
+                id: 1, 
+                title: 'Platform Scalability', 
+                summary: 'Build infrastructure to support 10x user growth', 
+                owner: 'MK',
+                quarterTarget: 'q2',
+                confidence: 'high',
+                health: 'on-track'
+            },
+            { 
+                id: 2, 
+                title: 'Enhanced Collaboration', 
+                summary: 'Enable real-time features for seamless team collaboration', 
+                owner: 'LT',
+                quarterTarget: 'q3',
+                confidence: 'medium',
+                health: 'at-risk'
+            }
+        ],
         themes: [
             {
                 name: 'Core Platform',
                 initiatives: [
-                    { id: 7, name: 'API v2 Development', status: 'completed', owner: 'MK', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-201' },
-                    { id: 8, name: 'Database Migration', status: 'in-progress', owner: 'RP', quarter: 'q2', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-202' }
+                    { id: 7, name: 'API v2 Development', status: 'completed', owner: 'MK', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-201', opportunityId: 1 },
+                    { id: 8, name: 'Database Migration', status: 'in-progress', owner: 'RP', quarter: 'q2', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-202', opportunityId: 1 }
                 ]
             },
             {
                 name: 'Product Features',
                 initiatives: [
-                    { id: 9, name: 'Real-time Collaboration', status: 'in-progress', owner: 'LT', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-203' },
-                    { id: 10, name: 'Mobile App Development', status: 'planned', owner: 'MK', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-204' }
+                    { id: 9, name: 'Real-time Collaboration', status: 'in-progress', owner: 'LT', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-203', opportunityId: 2 },
+                    { id: 10, name: 'Mobile App Development', status: 'planned', owner: 'MK', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-204', opportunityId: 2 }
                 ]
             },
             {
                 name: 'Infrastructure',
                 initiatives: [
-                    { id: 11, name: 'Kubernetes Migration', status: 'planned', owner: 'RP', quarter: 'q3', startQ: 'q3', endQ: 'q3', linkedIssue: 'LIN-205' },
-                    { id: 12, name: 'Performance Optimization', status: 'planned', owner: 'LT', quarter: 'q4', startQ: 'q4', endQ: 'q4', linkedIssue: 'LIN-206' }
+                    { id: 11, name: 'Kubernetes Migration', status: 'planned', owner: 'RP', quarter: 'q3', startQ: 'q3', endQ: 'q3', linkedIssue: 'LIN-205', opportunityId: 1 },
+                    { id: 12, name: 'Performance Optimization', status: 'planned', owner: 'LT', quarter: 'q4', startQ: 'q4', endQ: 'q4', linkedIssue: 'LIN-206', opportunityId: 1 }
                 ]
             }
         ]
@@ -69,19 +109,39 @@ const teamData = {
         progress: 58,
         teamSize: 6,
         lastUpdated: '4h ago',
+        opportunities: [
+            { 
+                id: 1, 
+                title: 'Ecosystem Expansion', 
+                summary: 'Build strategic partnerships to expand market reach', 
+                owner: 'TC',
+                quarterTarget: 'q2',
+                confidence: 'high',
+                health: 'on-track'
+            },
+            { 
+                id: 2, 
+                title: 'Integration Platform', 
+                summary: 'Enable seamless integrations with key enterprise tools', 
+                owner: 'KW',
+                quarterTarget: 'q3',
+                confidence: 'medium',
+                health: 'on-track'
+            }
+        ],
         themes: [
             {
                 name: 'Strategic Partnerships',
                 initiatives: [
-                    { id: 13, name: 'Enterprise Partner Program', status: 'completed', owner: 'TC', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-301' },
-                    { id: 14, name: 'Channel Partner Onboarding', status: 'in-progress', owner: 'NH', quarter: 'q2', startQ: 'q2', endQ: 'q2', linkedIssue: 'LIN-302' }
+                    { id: 13, name: 'Enterprise Partner Program', status: 'completed', owner: 'TC', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-301', opportunityId: 1 },
+                    { id: 14, name: 'Channel Partner Onboarding', status: 'in-progress', owner: 'NH', quarter: 'q2', startQ: 'q2', endQ: 'q2', linkedIssue: 'LIN-302', opportunityId: 1 }
                 ]
             },
             {
                 name: 'Integrations',
                 initiatives: [
-                    { id: 15, name: 'Slack Integration', status: 'in-progress', owner: 'KW', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-303' },
-                    { id: 16, name: 'Salesforce Integration', status: 'planned', owner: 'TC', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-304' }
+                    { id: 15, name: 'Slack Integration', status: 'in-progress', owner: 'KW', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-303', opportunityId: 2 },
+                    { id: 16, name: 'Salesforce Integration', status: 'planned', owner: 'TC', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-304', opportunityId: 2 }
                 ]
             }
         ]
@@ -93,19 +153,39 @@ const teamData = {
         progress: 51,
         teamSize: 11,
         lastUpdated: '3h ago',
+        opportunities: [
+            { 
+                id: 1, 
+                title: 'User Experience Excellence', 
+                summary: 'Deliver exceptional UX that drives adoption and satisfaction', 
+                owner: 'DL',
+                quarterTarget: 'q2',
+                confidence: 'high',
+                health: 'on-track'
+            },
+            { 
+                id: 2, 
+                title: 'Advanced Capabilities', 
+                summary: 'Unlock enterprise features that increase product value', 
+                owner: 'RB',
+                quarterTarget: 'q3',
+                confidence: 'medium',
+                health: 'on-track'
+            }
+        ],
         themes: [
             {
                 name: 'User Experience',
                 initiatives: [
-                    { id: 17, name: 'Design System v2', status: 'completed', owner: 'DL', quarter: 'q1', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-401' },
-                    { id: 18, name: 'Onboarding Redesign', status: 'in-progress', owner: 'JS', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-402' }
+                    { id: 17, name: 'Design System v2', status: 'completed', owner: 'DL', quarter: 'q1', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-401', opportunityId: 1 },
+                    { id: 18, name: 'Onboarding Redesign', status: 'in-progress', owner: 'JS', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-402', opportunityId: 1 }
                 ]
             },
             {
                 name: 'Core Features',
                 initiatives: [
-                    { id: 19, name: 'Advanced Analytics Dashboard', status: 'in-progress', owner: 'RB', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-403' },
-                    { id: 20, name: 'Workflow Automation', status: 'planned', owner: 'DL', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-404' }
+                    { id: 19, name: 'Advanced Analytics Dashboard', status: 'in-progress', owner: 'RB', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-403', opportunityId: 2 },
+                    { id: 20, name: 'Workflow Automation', status: 'planned', owner: 'DL', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-404', opportunityId: 2 }
                 ]
             }
         ]
@@ -117,19 +197,39 @@ const teamData = {
         progress: 72,
         teamSize: 7,
         lastUpdated: '5h ago',
+        opportunities: [
+            { 
+                id: 1, 
+                title: 'Customer Activation', 
+                summary: 'Accelerate time-to-value for new customers', 
+                owner: 'EB',
+                quarterTarget: 'q2',
+                confidence: 'high',
+                health: 'on-track'
+            },
+            { 
+                id: 2, 
+                title: 'Customer Retention', 
+                summary: 'Improve satisfaction and reduce churn through support excellence', 
+                owner: 'MP',
+                quarterTarget: 'q3',
+                confidence: 'medium',
+                health: 'on-track'
+            }
+        ],
         themes: [
             {
                 name: 'Customer Onboarding',
                 initiatives: [
-                    { id: 21, name: 'Automated Onboarding Flow', status: 'completed', owner: 'EB', quarter: 'q1', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-501' },
-                    { id: 22, name: 'Success Metrics Dashboard', status: 'in-progress', owner: 'MP', quarter: 'q2', startQ: 'q2', endQ: 'q2', linkedIssue: 'LIN-502' }
+                    { id: 21, name: 'Automated Onboarding Flow', status: 'completed', owner: 'EB', quarter: 'q1', startQ: 'q1', endQ: 'q2', linkedIssue: 'LIN-501', opportunityId: 1 },
+                    { id: 22, name: 'Success Metrics Dashboard', status: 'in-progress', owner: 'MP', quarter: 'q2', startQ: 'q2', endQ: 'q2', linkedIssue: 'LIN-502', opportunityId: 1 }
                 ]
             },
             {
                 name: 'Support & Training',
                 initiatives: [
-                    { id: 23, name: 'Knowledge Base Expansion', status: 'in-progress', owner: 'ZR', quarter: 'q3', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-503' },
-                    { id: 24, name: 'Webinar Series Launch', status: 'planned', owner: 'EB', quarter: 'q4', startQ: 'q4', endQ: 'q4', linkedIssue: 'LIN-504' }
+                    { id: 23, name: 'Knowledge Base Expansion', status: 'in-progress', owner: 'ZR', quarter: 'q3', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-503', opportunityId: 2 },
+                    { id: 24, name: 'Webinar Series Launch', status: 'planned', owner: 'EB', quarter: 'q4', startQ: 'q4', endQ: 'q4', linkedIssue: 'LIN-504', opportunityId: 2 }
                 ]
             }
         ]
@@ -141,19 +241,39 @@ const teamData = {
         progress: 48,
         teamSize: 9,
         lastUpdated: '6h ago',
+        opportunities: [
+            { 
+                id: 1, 
+                title: 'Operational Efficiency', 
+                summary: 'Automate processes to reduce manual work and errors', 
+                owner: 'HM',
+                quarterTarget: 'q2',
+                confidence: 'high',
+                health: 'on-track'
+            },
+            { 
+                id: 2, 
+                title: 'Infrastructure Modernization', 
+                summary: 'Upgrade systems for security, compliance, and scale', 
+                owner: 'NA',
+                quarterTarget: 'q3',
+                confidence: 'medium',
+                health: 'on-track'
+            }
+        ],
         themes: [
             {
                 name: 'Process Automation',
                 initiatives: [
-                    { id: 25, name: 'Expense Approval Workflow', status: 'completed', owner: 'HM', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-601' },
-                    { id: 26, name: 'HR Onboarding System', status: 'in-progress', owner: 'CF', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-602' }
+                    { id: 25, name: 'Expense Approval Workflow', status: 'completed', owner: 'HM', quarter: 'q1', startQ: 'q1', endQ: 'q1', linkedIssue: 'LIN-601', opportunityId: 1 },
+                    { id: 26, name: 'HR Onboarding System', status: 'in-progress', owner: 'CF', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-602', opportunityId: 1 }
                 ]
             },
             {
                 name: 'Tools & Infrastructure',
                 initiatives: [
-                    { id: 27, name: 'IT Asset Management', status: 'in-progress', owner: 'NA', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-603' },
-                    { id: 28, name: 'Security Compliance Update', status: 'planned', owner: 'HM', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-604' }
+                    { id: 27, name: 'IT Asset Management', status: 'in-progress', owner: 'NA', quarter: 'q2', startQ: 'q2', endQ: 'q3', linkedIssue: 'LIN-603', opportunityId: 2 },
+                    { id: 28, name: 'Security Compliance Update', status: 'planned', owner: 'HM', quarter: 'q3', startQ: 'q3', endQ: 'q4', linkedIssue: 'LIN-604', opportunityId: 2 }
                 ]
             }
         ]
@@ -281,49 +401,117 @@ function renderTimeline(team) {
 
 function renderInitiatives(team) {
     const initiativesList = document.getElementById('initiativesList');
+    initiativesList.innerHTML = ''; // Clear existing content
+    
     const initiatives = getAllInitiatives(getTeamFromURL());
     
-    initiatives.forEach(initiative => {
-        const card = document.createElement('div');
-        card.className = 'initiative-card';
+    // Group by opportunity
+    team.opportunities.forEach(opportunity => {
+        const oppInitiatives = initiatives.filter(init => init.opportunityId === opportunity.id);
         
-        const statusClass = initiative.status === 'completed' ? 'success' : 
-                           initiative.status === 'in-progress' ? 'warning' : 'secondary';
+        if (oppInitiatives.length === 0) return;
         
-        card.innerHTML = `
-            <div class="initiative-card-header">
-                <div>
-                    <h4>${initiative.name}</h4>
-                    <p class="initiative-theme">${initiative.theme}</p>
+        // Calculate counts
+        const completed = oppInitiatives.filter(i => i.status === 'completed').length;
+        const inProgress = oppInitiatives.filter(i => i.status === 'in-progress').length;
+        const planned = oppInitiatives.filter(i => i.status === 'planned').length;
+        
+        // Create opportunity section
+        const section = document.createElement('div');
+        section.className = 'opportunity-section';
+        
+        const healthClass = opportunity.health === 'on-track' ? 'success' : 
+                           opportunity.health === 'at-risk' ? 'warning' : 'danger';
+        
+        const confidenceClass = opportunity.confidence === 'high' ? 'success' : 
+                               opportunity.confidence === 'medium' ? 'warning' : 'secondary';
+        
+        section.innerHTML = `
+            <div class="opportunity-header">
+                <div class="opportunity-title-section">
+                    <h3>${opportunity.title}</h3>
+                    <p class="opportunity-summary">${opportunity.summary}</p>
                 </div>
-                <span class="badge ${statusClass}">${formatStatus(initiative.status)}</span>
+                <div class="opportunity-badges">
+                    <span class="badge ${healthClass}">${formatHealth(opportunity.health)}</span>
+                    <span class="badge ${confidenceClass}">${formatConfidence(opportunity.confidence)}</span>
+                    <span class="opportunity-count">${oppInitiatives.length} items</span>
+                </div>
             </div>
-            <div class="initiative-card-meta">
-                <div class="initiative-meta-item">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
-                        <path d="M7 3.5V7L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    ${formatQuarter(initiative.quarter)}
+            <div class="opportunity-stats">
+                <div class="stat-pill">
+                    <span class="stat-pill-value">${completed}</span>
+                    <span class="stat-pill-label">Completed</span>
                 </div>
-                <div class="initiative-meta-item">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
-                        <path d="M2 12c0-2.5 2-4 5-4s5 1.5 5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    ${initiative.owner}
+                <div class="stat-pill">
+                    <span class="stat-pill-value">${inProgress}</span>
+                    <span class="stat-pill-label">In Progress</span>
                 </div>
-                <div class="initiative-meta-item">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                    ${initiative.linkedIssue}
+                <div class="stat-pill">
+                    <span class="stat-pill-value">${planned}</span>
+                    <span class="stat-pill-label">Planned</span>
                 </div>
+            </div>
+            <div class="opportunity-initiatives">
             </div>
         `;
         
-        initiativesList.appendChild(card);
+        const initiativesContainer = section.querySelector('.opportunity-initiatives');
+        
+        // Add initiatives
+        oppInitiatives.forEach(initiative => {
+            const card = document.createElement('div');
+            card.className = 'initiative-card';
+            
+            const statusClass = initiative.status === 'completed' ? 'success' : 
+                               initiative.status === 'in-progress' ? 'warning' : 'secondary';
+            
+            card.innerHTML = `
+                <div class="initiative-card-header">
+                    <div>
+                        <h4>${initiative.name}</h4>
+                    </div>
+                    <span class="badge ${statusClass}">${formatStatus(initiative.status)}</span>
+                </div>
+                <div class="initiative-card-meta">
+                    <div class="initiative-meta-item">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M7 3.5V7L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        ${formatQuarter(initiative.quarter)}
+                    </div>
+                    <div class="initiative-meta-item">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <circle cx="7" cy="5" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M2 12c0-2.5 2-4 5-4s5 1.5 5 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        ${initiative.owner}
+                    </div>
+                    <div class="initiative-meta-item">
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                            <path d="M3 7h8M7 3v8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        </svg>
+                        ${initiative.linkedIssue}
+                    </div>
+                </div>
+            `;
+            
+            initiativesContainer.appendChild(card);
+        });
+        
+        initiativesList.appendChild(section);
     });
+}
+
+function formatHealth(health) {
+    return health.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+}
+
+function formatConfidence(confidence) {
+    return confidence.charAt(0).toUpperCase() + confidence.slice(1);
 }
 
 function renderBoard(team) {

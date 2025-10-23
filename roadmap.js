@@ -358,19 +358,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
 function renderTimeline(team) {
     const timelineBody = document.getElementById('timelineBody');
+    timelineBody.innerHTML = ''; // Clear existing content
     
-    team.themes.forEach(theme => {
+    const initiatives = getAllInitiatives(getTeamFromURL());
+    
+    // Group by opportunity
+    team.opportunities.forEach(opportunity => {
+        const oppInitiatives = initiatives.filter(init => init.opportunityId === opportunity.id);
+        
+        if (oppInitiatives.length === 0) return;
+        
         const row = document.createElement('div');
         row.className = 'timeline-row';
         
         const label = document.createElement('div');
         label.className = 'timeline-row-label';
-        label.textContent = theme.name;
+        label.innerHTML = `
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+                <strong style="font-size: 14px;">${opportunity.title}</strong>
+                <span style="font-size: 11px; color: #9ca3af;">${oppInitiatives.length} items</span>
+            </div>
+        `;
         
         const track = document.createElement('div');
         track.className = 'timeline-track';
         
-        theme.initiatives.forEach(initiative => {
+        oppInitiatives.forEach(initiative => {
             const item = document.createElement('div');
             item.className = `timeline-item ${initiative.status}`;
             

@@ -2193,6 +2193,28 @@ body:has(.navbar) {
     margin-top: 40px;
 }
 
+/* Timeline Section Header */
+.timeline-section-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.timeline-section-header h2 {
+    font-size: 24px;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.timeline-section-header p {
+    font-size: 16px;
+    color: #6b7280;
+}
+
+.timeline-content-wrapper {
+    /* Wrapper for timeline view */
+}
+
 /* Opportunity Sections */
 .opportunity-section {
     background: white;

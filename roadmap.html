@@ -98,37 +98,14 @@
             </div>
         </div>
         
-        <!-- Tabs -->
-        <div class="roadmap-tabs">
-            <button class="tab-button active" data-tab="timeline">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <rect x="2" y="3" width="12" height="2" rx="1" fill="currentColor"/>
-                    <rect x="2" y="7" width="9" height="2" rx="1" fill="currentColor"/>
-                    <rect x="2" y="11" width="6" height="2" rx="1" fill="currentColor"/>
-                </svg>
-                Timeline
-            </button>
-            <button class="tab-button" data-tab="initiatives">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                    <rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                    <rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                    <rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
-                Initiatives
-            </button>
-            <button class="tab-button" data-tab="board">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <rect x="2" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                    <rect x="6.5" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                    <rect x="11" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                </svg>
-                Board
-            </button>
+        <!-- Simple header for timeline -->
+        <div class="timeline-section-header">
+            <h2>Opportunity Timeline</h2>
+            <p>View when each opportunity will be released</p>
         </div>
         
-        <!-- Tab Content -->
-        <div class="tab-content active" id="timeline-content">
+        <!-- Timeline Content -->
+        <div class="timeline-content-wrapper">
             <div class="timeline-controls">
                 <div class="timeline-filters">
                     <select class="filter-select">
@@ -159,63 +136,6 @@
                 </div>
                 <div class="timeline-body" id="timelineBody">
                     <!-- Timeline items will be populated by JS -->
-                </div>
-            </div>
-        </div>
-        
-        <div class="tab-content" id="initiatives-content">
-            <div class="initiatives-header">
-                <div class="initiatives-filters">
-                    <select class="filter-select">
-                        <option value="all">All Statuses</option>
-                        <option value="planned">Planned</option>
-                        <option value="in-progress">In Progress</option>
-                        <option value="completed">Completed</option>
-                    </select>
-                    <select class="filter-select">
-                        <option value="all">All Owners</option>
-                    </select>
-                </div>
-                <div class="initiatives-search">
-                    <input type="text" placeholder="Search initiatives..." class="search-input">
-                </div>
-            </div>
-            
-            <div class="initiatives-list" id="initiativesList">
-                <!-- Initiatives will be populated by JS -->
-            </div>
-        </div>
-        
-        <div class="tab-content" id="board-content">
-            <div class="kanban-board">
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <h3>Planned</h3>
-                        <span class="kanban-count" id="plannedCount">0</span>
-                    </div>
-                    <div class="kanban-column-body" id="plannedColumn">
-                        <!-- Items will be populated by JS -->
-                    </div>
-                </div>
-                
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <h3>In Progress</h3>
-                        <span class="kanban-count" id="inProgressCount">0</span>
-                    </div>
-                    <div class="kanban-column-body" id="inProgressColumn">
-                        <!-- Items will be populated by JS -->
-                    </div>
-                </div>
-                
-                <div class="kanban-column">
-                    <div class="kanban-column-header">
-                        <h3>Completed</h3>
-                        <span class="kanban-count" id="completedCount">0</span>
-                    </div>
-                    <div class="kanban-column-body" id="completedColumn">
-                        <!-- Items will be populated by JS -->
-                    </div>
                 </div>
             </div>
         </div>

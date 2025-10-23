@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roadmap Digest - GetCoordinated</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; }
+            .digest-container { box-shadow: none !important; padding: 20px !important; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar no-print">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>GetCoordinated</h1>
+            </div>
+            <div class="nav-links">
+                <a href="roadmaps.html">Roadmaps</a>
+                <a href="integrations.html">Integrations</a>
+                <a href="settings.html">Settings</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        <div class="digest-container">
+            <!-- Digest Header -->
+            <div class="digest-header">
+                <div class="digest-title-section">
+                    <h1 id="digestTitle">Roadmap Update Digest</h1>
+                    <p id="digestSubtitle">Weekly update for stakeholders</p>
+                </div>
+                <div class="digest-meta">
+                    <div class="digest-meta-item">
+                        <span class="meta-label">Generated</span>
+                        <span class="meta-value" id="generateDate">-</span>
+                    </div>
+                    <div class="digest-meta-item">
+                        <span class="meta-label">Team</span>
+                        <span class="meta-value" id="teamName">-</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TL;DR Section -->
+            <div class="digest-section">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 2l2.4 5.2L18 8l-4.5 4.2 1.1 6.8-5.6-3-5.6 3 1.1-6.8L0 8l5.6-.8L10 2z" fill="#667eea"/>
+                    </svg>
+                    Summary
+                </h2>
+                <div class="digest-summary" id="digestSummary">
+                    <ul>
+                        <li>Loading summary...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Changes Section -->
+            <div class="digest-section" id="changesSection">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M10 3v14M3 10h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    What Changed
+                </h2>
+                <div class="digest-changes" id="digestChanges">
+                    <!-- Changes will be populated -->
+                </div>
+            </div>
+
+            <!-- Upcoming Milestones Section -->
+            <div class="digest-section">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2"/>
+                        <path d="M10 5v5l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Upcoming Next 30 Days
+                </h2>
+                <div class="digest-milestones" id="digestMilestones">
+                    <!-- Milestones will be populated -->
+                </div>
+            </div>
+
+            <!-- Current Status Section -->
+            <div class="digest-section">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <rect x="3" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <rect x="11" y="3" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <rect x="3" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                        <rect x="11" y="11" width="6" height="6" rx="1" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    Current Progress
+                </h2>
+                <div class="digest-progress" id="digestProgress">
+                    <!-- Progress will be populated -->
+                </div>
+            </div>
+
+            <!-- Actions Section -->
+            <div class="digest-actions no-print">
+                <button class="btn btn-secondary" onclick="window.print()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="3" y="2" width="10" height="3" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                        <rect x="3" y="8" width="10" height="6" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M5 11h6M5 13h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Print / Save as PDF
+                </button>
+                <button class="btn btn-secondary" onclick="copyDigestToClipboard()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="5" y="5" width="9" height="9" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M3 11V3a1 1 0 011-1h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Copy to Clipboard
+                </button>
+                <button class="btn btn-primary" onclick="window.location.href='roadmap.html?team=' + getTeamFromURL()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to Roadmap
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="roadmap.js"></script>
+    <script>
+        function getTeamFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('team') || 'gtm';
+        }
+
+        function generateDigest() {
+            const teamId = getTeamFromURL();
+            const team = teamData[teamId];
+            
+            if (!team) {
+                window.location.href = 'roadmaps.html';
+                return;
+            }
+
+            // Set header info
+            document.getElementById('digestTitle').textContent = `${team.name} Roadmap Update`;
+            document.getElementById('generateDate').textContent = new Date().toLocaleDateString();
+            document.getElementById('teamName').textContent = team.name;
+
+            // Get snapshot and detect changes
+            const snapshotKey = `roadmap_snapshot_${teamId}`;
+            const snapshotData = localStorage.getItem(snapshotKey);
+            
+            let changes = [];
+            if (snapshotData) {
+                const snapshot = JSON.parse(snapshotData);
+                changes = detectChanges(snapshot.data, team);
+            }
+
+            // Generate summary
+            const initiatives = getAllInitiatives(teamId);
+            const inProgress = initiatives.filter(i => i.status === 'in-progress').length;
+            const completed = initiatives.filter(i => i.status === 'completed').length;
+            const planned = initiatives.filter(i => i.status === 'planned').length;
+
+            const summaryHTML = `
+                <ul>
+                    <li><strong>${changes.length} changes</strong> since last update${snapshotData ? ' on ' + new Date(JSON.parse(snapshotData).timestamp).toLocaleDateString() : ''}</li>
+                    <li><strong>${inProgress} initiatives</strong> currently in progress across ${team.themes.length} themes</li>
+                    <li><strong>${completed} initiatives</strong> completed, <strong>${planned}</strong> planned for upcoming quarters</li>
+                    <li>Team progress: <strong>${team.progress}% complete</strong> overall</li>
+                </ul>
+            `;
+            document.getElementById('digestSummary').innerHTML = summaryHTML;
+
+            // Render changes
+            if (changes.length > 0) {
+                const changesHTML = changes.map(change => `
+                    <div class="digest-change-item digest-change-${change.type}">
+                        <span class="digest-change-badge">${change.type}</span>
+                        <div>
+                            <strong>${change.initiative}</strong>
+                            <p>${change.details}</p>
+                        </div>
+                    </div>
+                `).join('');
+                document.getElementById('digestChanges').innerHTML = changesHTML;
+            } else {
+                document.getElementById('changesSection').style.display = 'none';
+            }
+
+            // Render upcoming milestones (next 30 days - simulated)
+            const upcomingInitiatives = initiatives.filter(i => 
+                i.status === 'in-progress' || (i.status === 'planned' && i.quarter === 'q2')
+            ).slice(0, 5);
+
+            const milestonesHTML = upcomingInitiatives.map((init, idx) => `
+                <div class="digest-milestone-item">
+                    <div class="milestone-date">Q${init.quarter.slice(-1)} 2024</div>
+                    <div class="milestone-content">
+                        <strong>${init.name}</strong>
+                        <p>${init.theme} • ${init.linkedIssue}</p>
+                    </div>
+                </div>
+            `).join('');
+            document.getElementById('digestMilestones').innerHTML = milestonesHTML || '<p class="digest-empty">No upcoming milestones in the next 30 days</p>';
+
+            // Render current progress by theme
+            const progressHTML = team.themes.map(theme => {
+                const themeInitiatives = theme.initiatives;
+                const themeCompleted = themeInitiatives.filter(i => i.status === 'completed').length;
+                const themeTotal = themeInitiatives.length;
+                const themeProgress = Math.round((themeCompleted / themeTotal) * 100);
+
+                return `
+                    <div class="digest-progress-item">
+                        <div class="progress-item-header">
+                            <strong>${theme.name}</strong>
+                            <span>${themeProgress}%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: ${themeProgress}%"></div>
+                        </div>
+                        <p class="progress-details">${themeCompleted} of ${themeTotal} initiatives completed</p>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('digestProgress').innerHTML = progressHTML;
+        }
+
+        function copyDigestToClipboard() {
+            const digestContainer = document.querySelector('.digest-container');
+            const range = document.createRange();
+            range.selectNode(digestContainer);
+            window.getSelection().removeAllRanges();
+            window.getSelection().addRange(range);
+            document.execCommand('copy');
+            window.getSelection().removeAllRanges();
+            
+            alert('Digest copied to clipboard!\n\nYou can now paste it into an email or Slack message.');
+        }
+
+        // Generate digest on page load
+        document.addEventListener('DOMContentLoaded', generateDigest);
+    </script>
+</body>
+</html>

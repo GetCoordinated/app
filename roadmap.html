@@ -40,20 +40,37 @@
                         <p id="roadmapDescription">Loading...</p>
                     </div>
                 </div>
-                <div class="roadmap-actions">
-                    <button class="btn btn-secondary">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M13.5 8H2.5M8 2.5V13.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Export
-                    </button>
-                    <button class="btn btn-primary">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        </svg>
-                        Add Initiative
-                    </button>
-                </div>
+            <div class="roadmap-actions" id="roadmapActions">
+                <button class="btn btn-secondary" onclick="togglePresentMode()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <rect x="2" y="3" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M5 13v2M11 13v2M3 15h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Present
+                </button>
+                <button class="btn btn-secondary" onclick="shareRoadmap()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <circle cx="4" cy="8" r="2" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/>
+                        <circle cx="12" cy="12" r="2" stroke="currentColor" stroke-width="1.5"/>
+                        <path d="M6 7l4-2M6 9l4 2" stroke="currentColor" stroke-width="1.5"/>
+                    </svg>
+                    Share
+                </button>
+                <button class="btn btn-secondary" onclick="publishSnapshot()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 2v8M5 7l3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3 12h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                    Publish
+                </button>
+                <button class="btn btn-primary" onclick="addInitiative()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M8 3V13M3 8H13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    Add Initiative
+                </button>
+            </div>
             </div>
             
             <div class="roadmap-meta">

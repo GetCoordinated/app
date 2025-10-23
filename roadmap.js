@@ -193,6 +193,21 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    // Check for readonly and present mode
+    const params = new URLSearchParams(window.location.search);
+    const isReadonly = params.get('readonly') === '1';
+    const isPresentMode = params.get('present') === '1';
+    
+    if (isReadonly) {
+        document.body.classList.add('readonly-mode');
+        const actions = document.getElementById('roadmapActions');
+        if (actions) actions.style.display = 'none';
+    }
+    
+    if (isPresentMode) {
+        togglePresentMode(true);
+    }
+    
     // Populate header
     document.getElementById('roadmapTitle').textContent = team.name;
     document.getElementById('roadmapDescription').textContent = team.description;
@@ -216,6 +231,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Setup tab switching
     setupTabs();
+    
+    // Load and show diff if snapshot exists
+    checkForChanges(teamId);
 });
 
 function renderTimeline(team) {
@@ -371,4 +389,266 @@ function formatStatus(status) {
 
 function formatQuarter(quarter) {
     return quarter.toUpperCase().replace('Q', 'Q') + ' 2024';
+}
+
+// Present Mode
+function togglePresentMode(forceEnable = false) {
+    const body = document.body;
+    const navbar = document.querySelector('.navbar');
+    const backNav = document.querySelector('.back-nav');
+    const actions = document.getElementById('roadmapActions');
+    const tabs = document.querySelector('.roadmap-tabs');
+    
+    if (forceEnable || !body.classList.contains('present-mode')) {
+        body.classList.add('present-mode');
+        if (navbar) navbar.style.display = 'none';
+        if (backNav) backNav.style.display = 'none';
+        if (actions) actions.style.display = 'none';
+        
+        // Add exit present mode button
+        if (!document.getElementById('exitPresentBtn')) {
+            const exitBtn = document.createElement('button');
+            exitBtn.id = 'exitPresentBtn';
+            exitBtn.className = 'exit-present-btn';
+            exitBtn.innerHTML = `
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M12 4L4 12M4 4l8 8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Exit Present Mode
+            `;
+            exitBtn.onclick = function() {
+                body.classList.remove('present-mode');
+                if (navbar) navbar.style.display = 'block';
+                if (backNav) backNav.style.display = 'block';
+                if (actions) actions.style.display = 'flex';
+                this.remove();
+            };
+            document.querySelector('.page-container').insertBefore(exitBtn, document.querySelector('.roadmap-detail-header'));
+        }
+    } else {
+        body.classList.remove('present-mode');
+        if (navbar) navbar.style.display = 'block';
+        if (backNav) backNav.style.display = 'block';
+        if (actions) actions.style.display = 'flex';
+        const exitBtn = document.getElementById('exitPresentBtn');
+        if (exitBtn) exitBtn.remove();
+    }
+}
+
+// Share Roadmap
+function shareRoadmap() {
+    const teamId = getTeamFromURL();
+    const baseUrl = window.location.origin + window.location.pathname;
+    const shareUrl = `${baseUrl}?team=${teamId}&readonly=1`;
+    const presentUrl = `${baseUrl}?team=${teamId}&readonly=1&present=1`;
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Share Roadmap</h2>
+                <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
+            </div>
+            <div class="modal-body">
+                <p>Share this roadmap with stakeholders using these read-only links:</p>
+                
+                <div class="share-option">
+                    <label>Standard View</label>
+                    <div class="share-link-box">
+                        <input type="text" readonly value="${shareUrl}" id="shareUrl" class="share-link-input">
+                        <button class="btn btn-secondary" onclick="copyToClipboard('shareUrl')">Copy</button>
+                    </div>
+                    <p class="share-note">Recipients can view the full roadmap with all tabs</p>
+                </div>
+                
+                <div class="share-option">
+                    <label>Present Mode</label>
+                    <div class="share-link-box">
+                        <input type="text" readonly value="${presentUrl}" id="presentUrl" class="share-link-input">
+                        <button class="btn btn-secondary" onclick="copyToClipboard('presentUrl')">Copy</button>
+                    </div>
+                    <p class="share-note">Clean view optimized for presentations and reviews</p>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function copyToClipboard(inputId) {
+    const input = document.getElementById(inputId);
+    input.select();
+    document.execCommand('copy');
+    
+    const btn = input.nextElementSibling;
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '✓ Copied';
+    btn.classList.add('btn-success');
+    
+    setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.classList.remove('btn-success');
+    }, 2000);
+}
+
+// Publish Snapshot
+function publishSnapshot() {
+    const teamId = getTeamFromURL();
+    const team = teamData[teamId];
+    
+    if (!team) return;
+    
+    const snapshot = {
+        teamId: teamId,
+        timestamp: new Date().toISOString(),
+        data: JSON.parse(JSON.stringify(team))
+    };
+    
+    // Store in localStorage
+    localStorage.setItem(`roadmap_snapshot_${teamId}`, JSON.stringify(snapshot));
+    
+    alert(`Snapshot published successfully!\n\nTimestamp: ${new Date().toLocaleString()}\n\nThis snapshot will be used to track changes for future updates.`);
+    
+    // Refresh to show changes panel
+    checkForChanges(teamId);
+}
+
+// Check for Changes
+function checkForChanges(teamId) {
+    const snapshotKey = `roadmap_snapshot_${teamId}`;
+    const snapshotData = localStorage.getItem(snapshotKey);
+    
+    if (!snapshotData) return;
+    
+    const snapshot = JSON.parse(snapshotData);
+    const currentTeam = teamData[teamId];
+    
+    const changes = detectChanges(snapshot.data, currentTeam);
+    
+    if (changes.length > 0) {
+        displayChangesPanel(changes, snapshot.timestamp);
+    }
+}
+
+function detectChanges(oldTeam, newTeam) {
+    const changes = [];
+    
+    // Get all initiatives from both versions
+    const oldInitiatives = [];
+    const newInitiatives = [];
+    
+    oldTeam.themes.forEach(theme => {
+        theme.initiatives.forEach(init => {
+            oldInitiatives.push({ ...init, theme: theme.name });
+        });
+    });
+    
+    newTeam.themes.forEach(theme => {
+        theme.initiatives.forEach(init => {
+            newInitiatives.push({ ...init, theme: theme.name });
+        });
+    });
+    
+    // Check for added initiatives
+    newInitiatives.forEach(newInit => {
+        const oldInit = oldInitiatives.find(i => i.id === newInit.id);
+        if (!oldInit) {
+            changes.push({
+                type: 'added',
+                initiative: newInit.name,
+                details: `Added to ${newInit.theme}`
+            });
+        }
+    });
+    
+    // Check for removed initiatives
+    oldInitiatives.forEach(oldInit => {
+        const newInit = newInitiatives.find(i => i.id === oldInit.id);
+        if (!newInit) {
+            changes.push({
+                type: 'removed',
+                initiative: oldInit.name,
+                details: `Removed from ${oldInit.theme}`
+            });
+        }
+    });
+    
+    // Check for modified initiatives
+    newInitiatives.forEach(newInit => {
+        const oldInit = oldInitiatives.find(i => i.id === newInit.id);
+        if (oldInit) {
+            if (oldInit.status !== newInit.status) {
+                changes.push({
+                    type: 'modified',
+                    initiative: newInit.name,
+                    details: `Status changed: ${formatStatus(oldInit.status)} → ${formatStatus(newInit.status)}`
+                });
+            }
+            if (oldInit.quarter !== newInit.quarter) {
+                changes.push({
+                    type: 'modified',
+                    initiative: newInit.name,
+                    details: `Quarter changed: ${formatQuarter(oldInit.quarter)} → ${formatQuarter(newInit.quarter)}`
+                });
+            }
+        }
+    });
+    
+    return changes;
+}
+
+function displayChangesPanel(changes, snapshotTimestamp) {
+    // Remove existing panel if any
+    const existingPanel = document.getElementById('changesPanel');
+    if (existingPanel) existingPanel.remove();
+    
+    const panel = document.createElement('div');
+    panel.id = 'changesPanel';
+    panel.className = 'changes-panel';
+    panel.innerHTML = `
+        <div class="changes-header">
+            <h3>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 3v10M3 8h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Changes Since Last Publish
+            </h3>
+            <span class="changes-timestamp">Last published: ${new Date(snapshotTimestamp).toLocaleString()}</span>
+            <button class="btn-icon" onclick="document.getElementById('changesPanel').remove()">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                    <path d="M10 4L4 10M4 4l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+        <div class="changes-list">
+            ${changes.map(change => `
+                <div class="change-item change-${change.type}">
+                    <span class="change-badge">${change.type}</span>
+                    <div class="change-content">
+                        <strong>${change.initiative}</strong>
+                        <span>${change.details}</span>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+        <div class="changes-actions">
+            <button class="btn btn-secondary" onclick="exportDigest()">Export Digest</button>
+            <button class="btn btn-primary" onclick="publishSnapshot()">Publish New Snapshot</button>
+        </div>
+    `;
+    
+    const container = document.querySelector('.page-container');
+    container.insertBefore(panel, document.querySelector('.roadmap-tabs'));
+}
+
+// Export Digest
+function exportDigest() {
+    window.location.href = `digest.html?team=${getTeamFromURL()}`;
+}
+
+// Add Initiative (placeholder)
+function addInitiative() {
+    alert('Add Initiative feature coming soon!\n\nThis will allow you to create new initiatives directly from the roadmap view.');
 }

@@ -89,19 +89,15 @@
             </div>
         </div>
         
-        <!-- Opportunities Breakdown Section -->
-        <div class="opportunities-breakdown-section">
-            <h2>Opportunities & Linear Items</h2>
-            <p>Grouped issues and projects for each opportunity</p>
-            <div id="opportunitiesBreakdown" class="opportunities-breakdown">
-                <!-- Will be populated by JS -->
-            </div>
-        </div>
-        
         <!-- Timeline Section -->
         <div class="timeline-section-header">
-            <h2>Release Timeline</h2>
-            <p>Click any opportunity to see details</p>
+            <div>
+                <h2>Release Timeline</h2>
+                <p>Click any opportunity to see details</p>
+            </div>
+            <a href="opportunities.html?team=<script>document.write(new URLSearchParams(window.location.search).get('team') || 'gtm')</script>" class="btn btn-secondary">
+                View Opportunities Breakdown
+            </a>
         </div>
         
         <!-- Timeline Content -->

@@ -445,9 +445,9 @@ function renderTimeline(team) {
             </div>
         `;
         
-        // Make clickable
+        // Make clickable - show modal instead
         row.onclick = function() {
-            toggleOpportunityDetails(opportunity, oppInitiatives, row);
+            showOpportunityModal(opportunity, oppInitiatives);
         };
         
         const track = document.createElement('div');
@@ -483,88 +483,84 @@ function renderTimeline(team) {
 }
 
 
-function toggleOpportunityDetails(opportunity, initiatives, rowElement) {
-    const existingDetails = rowElement.nextElementSibling;
-    
-    // If details already shown, hide them
-    if (existingDetails && existingDetails.classList.contains('opportunity-details-row')) {
-        existingDetails.remove();
-        rowElement.classList.remove('expanded');
-        return;
-    }
-    
-    // Create details row
-    const detailsRow = document.createElement('div');
-    detailsRow.className = 'opportunity-details-row';
-    
+function showOpportunityModal(opportunity, initiatives) {
     const healthClass = opportunity.health === 'on-track' ? 'success' : 
                        opportunity.health === 'at-risk' ? 'warning' : 'danger';
     
     const confidenceClass = opportunity.confidence === 'high' ? 'success' : 
                            opportunity.confidence === 'medium' ? 'warning' : 'secondary';
     
-    detailsRow.innerHTML = `
-        <div class="opportunity-details-content">
-            <div class="details-header">
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.style.display = 'flex';
+    modal.innerHTML = `
+        <div class="modal-content modal-large">
+            <div class="modal-header">
                 <div>
-                    <h3>${opportunity.title}</h3>
-                    <p>${opportunity.summary}</p>
+                    <h2>${opportunity.title}</h2>
+                    <p style="color: #6b7280; margin-top: 8px;">${opportunity.summary}</p>
                 </div>
-                <button class="btn-icon" onclick="this.closest('.opportunity-details-row').previousElementSibling.click()">
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                        <path d="M10 4L4 10M4 4l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    </svg>
-                </button>
+                <button class="modal-close" onclick="this.closest('.modal').remove()">×</button>
             </div>
-            
-            <div class="details-meta">
-                <div class="detail-item">
-                    <span class="detail-label">Status</span>
-                    <span class="badge ${healthClass}">${formatHealth(opportunity.health)}</span>
+            <div class="modal-body">
+                <div class="details-meta">
+                    <div class="detail-item">
+                        <span class="detail-label">Status</span>
+                        <span class="badge ${healthClass}">${formatHealth(opportunity.health)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Confidence</span>
+                        <span class="badge ${confidenceClass}">${formatConfidence(opportunity.confidence)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Target Quarter</span>
+                        <span>${formatQuarter(opportunity.quarterTarget)}</span>
+                    </div>
+                    <div class="detail-item">
+                        <span class="detail-label">Owner</span>
+                        <span>${opportunity.owner}</span>
+                    </div>
                 </div>
-                <div class="detail-item">
-                    <span class="detail-label">Confidence</span>
-                    <span class="badge ${confidenceClass}">${formatConfidence(opportunity.confidence)}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Target Quarter</span>
-                    <span>${formatQuarter(opportunity.quarterTarget)}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Owner</span>
-                    <span>${opportunity.owner}</span>
-                </div>
-            </div>
-            
-            <div class="details-section">
-                <h4>Linear Items (${initiatives.length})</h4>
-                <div class="details-items-grid">
-                    ${initiatives.map(init => {
-                        const statusClass = init.status === 'completed' ? 'success' : 
-                                           init.status === 'in-progress' ? 'warning' : 'secondary';
-                        return `
-                            <div class="detail-item-card">
-                                <div class="detail-item-header">
-                                    <span class="issue-id">${init.linkedIssue}</span>
-                                    <span class="badge ${statusClass}">${formatStatus(init.status)}</span>
+                
+                <div class="details-section">
+                    <h4>Linear Items (${initiatives.length})</h4>
+                    <div class="details-items-grid">
+                        ${initiatives.map(init => {
+                            const statusClass = init.status === 'completed' ? 'success' : 
+                                               init.status === 'in-progress' ? 'warning' : 'secondary';
+                            return `
+                                <div class="detail-item-card">
+                                    <div class="detail-item-header">
+                                        <span class="issue-id">${init.linkedIssue}</span>
+                                        <span class="badge ${statusClass}">${formatStatus(init.status)}</span>
+                                    </div>
+                                    <div class="detail-item-title">${init.name}</div>
+                                    <div class="detail-item-footer">
+                                        <span>${formatQuarter(init.quarter)}</span>
+                                        <span>•</span>
+                                        <span>${init.owner}</span>
+                                    </div>
                                 </div>
-                                <div class="detail-item-title">${init.name}</div>
-                                <div class="detail-item-footer">
-                                    <span>${formatQuarter(init.quarter)}</span>
-                                    <span>•</span>
-                                    <span>${init.owner}</span>
-                                </div>
-                            </div>
-                        `;
-                    }).join('')}
+                            `;
+                        }).join('')}
+                    </div>
                 </div>
-                <a href="#opportunitiesBreakdown" class="view-all-link">View full breakdown above →</a>
+                
+                <div style="margin-top: 24px; padding-top: 24px; border-top: 1px solid #e5e7eb;">
+                    <a href="opportunities.html?team=${getTeamFromURL()}" class="view-all-link">View full opportunities breakdown →</a>
+                </div>
             </div>
         </div>
     `;
     
-    rowElement.classList.add('expanded');
-    rowElement.after(detailsRow);
+    // Close on background click
+    modal.onclick = function(e) {
+        if (e.target === modal) {
+            modal.remove();
+        }
+    };
+    
+    document.body.appendChild(modal);
 }
 
 function formatStatus(status) {

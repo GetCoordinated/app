@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opportunities Breakdown - GetCoordinated</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1>GetCoordinated</h1>
+            </div>
+            <div class="nav-links">
+                <a href="roadmaps.html">Roadmaps</a>
+                <a href="integrations.html">Integrations</a>
+                <a href="settings.html">Settings</a>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="page-container">
+        <!-- Page Header -->
+        <div class="roadmap-detail-header">
+            <div class="back-nav">
+                <a href="#" onclick="history.back(); return false;" class="back-link">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Back to Roadmap
+                </a>
+            </div>
+            
+            <div class="roadmap-title-section">
+                <div class="roadmap-title-left">
+                    <div class="roadmap-icon-large" id="roadmapIcon"></div>
+                    <div>
+                        <h1 id="teamName">Loading...</h1>
+                        <p id="teamDescription">Loading...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Opportunities Breakdown Section -->
+        <div class="opportunities-breakdown-section">
+            <h2>Opportunities & Linear Items</h2>
+            <p>Grouped issues and projects for each opportunity</p>
+            <div id="opportunitiesBreakdown" class="opportunities-breakdown">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+    </div>
+    
+    <script src="roadmap.js"></script>
+    <script>
+        // Initialize opportunities page
+        document.addEventListener('DOMContentLoaded', function() {
+            const teamId = new URLSearchParams(window.location.search).get('team') || 'gtm';
+            const team = teamData[teamId];
+            
+            if (!team) {
+                window.location.href = 'roadmaps.html';
+                return;
+            }
+            
+            // Set team info
+            document.getElementById('teamName').textContent = team.name + ' - Opportunities';
+            document.getElementById('teamDescription').textContent = team.description;
+            
+            // Set icon
+            const iconElement = document.getElementById('roadmapIcon');
+            iconElement.className = `roadmap-icon-large ${team.icon}`;
+            
+            // Render opportunities breakdown
+            renderOpportunitiesBreakdown(team);
+        });
+    </script>
+</body>
+</html>

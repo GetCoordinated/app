@@ -331,8 +331,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Populate header
     document.getElementById('roadmapTitle').textContent = team.name;
     document.getElementById('roadmapDescription').textContent = team.description;
-    document.getElementById('metaProgressBar').style.width = team.progress + '%';
-    document.getElementById('metaProgressText').textContent = team.progress + '%';
     document.getElementById('metaTeamSize').textContent = team.teamSize;
     document.getElementById('metaLastUpdated').textContent = team.lastUpdated;
     
@@ -340,12 +338,87 @@ document.addEventListener('DOMContentLoaded', function() {
     const iconElement = document.getElementById('roadmapIcon');
     iconElement.className = `roadmap-icon-large ${team.icon}`;
     
+    // Populate opportunities breakdown
+    renderOpportunitiesBreakdown(team);
+    
     // Populate timeline view
     renderTimeline(team);
     
     // Load and show diff if snapshot exists
     checkForChanges(teamId);
 });
+
+function renderOpportunitiesBreakdown(team) {
+    const container = document.getElementById('opportunitiesBreakdown');
+    container.innerHTML = '';
+    
+    const initiatives = getAllInitiatives(getTeamFromURL());
+    
+    team.opportunities.forEach(opportunity => {
+        const oppInitiatives = initiatives.filter(init => init.opportunityId === opportunity.id);
+        
+        if (oppInitiatives.length === 0) return;
+        
+        const card = document.createElement('div');
+        card.className = 'opportunity-breakdown-card';
+        
+        const healthClass = opportunity.health === 'on-track' ? 'success' : 
+                           opportunity.health === 'at-risk' ? 'warning' : 'danger';
+        
+        const confidenceClass = opportunity.confidence === 'high' ? 'success' : 
+                               opportunity.confidence === 'medium' ? 'warning' : 'secondary';
+        
+        card.innerHTML = `
+            <div class="opportunity-breakdown-header">
+                <div>
+                    <h3>${opportunity.title}</h3>
+                    <p class="opportunity-summary">${opportunity.summary}</p>
+                    <div class="opportunity-meta">
+                        <span class="badge ${healthClass}">${formatHealth(opportunity.health)}</span>
+                        <span class="badge ${confidenceClass}">${formatConfidence(opportunity.confidence)}</span>
+                        <span class="meta-text">Target: ${formatQuarter(opportunity.quarterTarget)}</span>
+                        <span class="meta-text">Owner: ${opportunity.owner}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="linear-items-list">
+                <h4>Linear Items (${oppInitiatives.length})</h4>
+                <div class="linear-items">
+                    ${oppInitiatives.map(init => {
+                        const statusClass = init.status === 'completed' ? 'success' : 
+                                           init.status === 'in-progress' ? 'warning' : 'secondary';
+                        return `
+                            <div class="linear-item">
+                                <div class="linear-item-header">
+                                    <span class="linear-issue-id">${init.linkedIssue}</span>
+                                    <span class="badge ${statusClass}">${formatStatus(init.status)}</span>
+                                </div>
+                                <div class="linear-item-title">${init.name}</div>
+                                <div class="linear-item-meta">
+                                    <span>${formatQuarter(init.quarter)}</span>
+                                    <span>•</span>
+                                    <span>${init.owner}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            </div>
+        `;
+        
+        container.appendChild(card);
+    });
+}
+
+function formatHealth(health) {
+    return health.split('-').map(word => 
+        word.charAt(0).toUpperCase() + word.slice(1)
+    ).join(' ');
+}
+
+function formatConfidence(confidence) {
+    return confidence.charAt(0).toUpperCase() + confidence.slice(1);
+}
 
 function renderTimeline(team) {
     const timelineBody = document.getElementById('timelineBody');
@@ -360,7 +433,8 @@ function renderTimeline(team) {
         if (oppInitiatives.length === 0) return;
         
         const row = document.createElement('div');
-        row.className = 'timeline-row';
+        row.className = 'timeline-row clickable';
+        row.dataset.opportunityId = opportunity.id;
         
         const label = document.createElement('div');
         label.className = 'timeline-row-label';
@@ -370,6 +444,11 @@ function renderTimeline(team) {
                 <span style="font-size: 11px; color: #9ca3af;">${oppInitiatives.length} items</span>
             </div>
         `;
+        
+        // Make clickable
+        row.onclick = function() {
+            toggleOpportunityDetails(opportunity, oppInitiatives, row);
+        };
         
         const track = document.createElement('div');
         track.className = 'timeline-track';
@@ -403,6 +482,90 @@ function renderTimeline(team) {
     });
 }
 
+
+function toggleOpportunityDetails(opportunity, initiatives, rowElement) {
+    const existingDetails = rowElement.nextElementSibling;
+    
+    // If details already shown, hide them
+    if (existingDetails && existingDetails.classList.contains('opportunity-details-row')) {
+        existingDetails.remove();
+        rowElement.classList.remove('expanded');
+        return;
+    }
+    
+    // Create details row
+    const detailsRow = document.createElement('div');
+    detailsRow.className = 'opportunity-details-row';
+    
+    const healthClass = opportunity.health === 'on-track' ? 'success' : 
+                       opportunity.health === 'at-risk' ? 'warning' : 'danger';
+    
+    const confidenceClass = opportunity.confidence === 'high' ? 'success' : 
+                           opportunity.confidence === 'medium' ? 'warning' : 'secondary';
+    
+    detailsRow.innerHTML = `
+        <div class="opportunity-details-content">
+            <div class="details-header">
+                <div>
+                    <h3>${opportunity.title}</h3>
+                    <p>${opportunity.summary}</p>
+                </div>
+                <button class="btn-icon" onclick="this.closest('.opportunity-details-row').previousElementSibling.click()">
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                        <path d="M10 4L4 10M4 4l6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="details-meta">
+                <div class="detail-item">
+                    <span class="detail-label">Status</span>
+                    <span class="badge ${healthClass}">${formatHealth(opportunity.health)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Confidence</span>
+                    <span class="badge ${confidenceClass}">${formatConfidence(opportunity.confidence)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Target Quarter</span>
+                    <span>${formatQuarter(opportunity.quarterTarget)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Owner</span>
+                    <span>${opportunity.owner}</span>
+                </div>
+            </div>
+            
+            <div class="details-section">
+                <h4>Linear Items (${initiatives.length})</h4>
+                <div class="details-items-grid">
+                    ${initiatives.map(init => {
+                        const statusClass = init.status === 'completed' ? 'success' : 
+                                           init.status === 'in-progress' ? 'warning' : 'secondary';
+                        return `
+                            <div class="detail-item-card">
+                                <div class="detail-item-header">
+                                    <span class="issue-id">${init.linkedIssue}</span>
+                                    <span class="badge ${statusClass}">${formatStatus(init.status)}</span>
+                                </div>
+                                <div class="detail-item-title">${init.name}</div>
+                                <div class="detail-item-footer">
+                                    <span>${formatQuarter(init.quarter)}</span>
+                                    <span>•</span>
+                                    <span>${init.owner}</span>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                <a href="#opportunitiesBreakdown" class="view-all-link">View full breakdown above →</a>
+            </div>
+        </div>
+    `;
+    
+    rowElement.classList.add('expanded');
+    rowElement.after(detailsRow);
+}
 
 function formatStatus(status) {
     return status.split('-').map(word => 

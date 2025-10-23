@@ -75,15 +75,6 @@
             
             <div class="roadmap-meta">
                 <div class="meta-item">
-                    <span class="meta-label">Progress</span>
-                    <div class="meta-progress">
-                        <div class="mini-progress-bar">
-                            <div class="mini-progress-fill" id="metaProgressBar"></div>
-                        </div>
-                        <span id="metaProgressText">0%</span>
-                    </div>
-                </div>
-                <div class="meta-item">
                     <span class="meta-label">Team Size</span>
                     <span class="meta-value" id="metaTeamSize">0</span>
                 </div>
@@ -98,10 +89,19 @@
             </div>
         </div>
         
-        <!-- Simple header for timeline -->
+        <!-- Opportunities Breakdown Section -->
+        <div class="opportunities-breakdown-section">
+            <h2>Opportunities & Linear Items</h2>
+            <p>Grouped issues and projects for each opportunity</p>
+            <div id="opportunitiesBreakdown" class="opportunities-breakdown">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+        
+        <!-- Timeline Section -->
         <div class="timeline-section-header">
-            <h2>Opportunity Timeline</h2>
-            <p>View when each opportunity will be released</p>
+            <h2>Release Timeline</h2>
+            <p>Click any opportunity to see details</p>
         </div>
         
         <!-- Timeline Content -->
